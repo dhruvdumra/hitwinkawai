@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'memories_page.dart';
 import 'therapy_page.dart';
+import 'letter_page.dart';
 
 void main() => runApp(const TwinApp());
 
@@ -616,13 +617,43 @@ class _HomePageState extends State<HomePage>
                   delay: 0,
                 ),
                 const SizedBox(height: 20),
+                // In main.dart, replace the "Letter" card's onTap:
                 _buildMenuCard(
                   context,
                   icon: '💌',
                   title: 'letter',
                   subtitle: 'words i needed to say',
                   onTap: () {
-                    print('Letter tapped');
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const LetterPage(),
+                        transitionDuration: const Duration(milliseconds: 500),
+                        transitionsBuilder: (
+                          context,
+                          animation,
+                          secondaryAnimation,
+                          child,
+                        ) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: SlideTransition(
+                              position: Tween<Offset>(
+                                begin: const Offset(0, 0.08),
+                                end: Offset.zero,
+                              ).animate(
+                                CurvedAnimation(
+                                  parent: animation,
+                                  curve: Curves.easeOut,
+                                ),
+                              ),
+                              child: child,
+                            ),
+                          );
+                        },
+                      ),
+                    );
                   },
                   delay: 0.15,
                 ),
