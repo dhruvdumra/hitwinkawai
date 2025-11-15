@@ -35,7 +35,7 @@ I know I have told this before but I really mean it that the last 4 months hold 
 
 Anyways thankyou twin for always being there for me and always listening to me :DDDD I have been a bitch a lot of times and I know I hurted you a lot because of it but thankyou for still not giving up on me kind of I was expecting to be blocked forever when the "hello cutie" thing happened icl. Always remember ur da goat twin ur da goat never doubt urself for any second trust me. Now that I see this the app looks so weird ass shit I should have thought it more better sorry twin. :((( 😭😭
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
 
 All the above things I wrote was written on 30th October, one day before you told me there isn't a problem and we can stay as friends. Now what I will write is written on 15th November the next day after the picnic. A lot happened in these 2 weeks A LOT AND I AM SOSOSOSOSOOSOS GLAD IT HAPPENED IT WAS SUCH A GOAT TIME OMG.
 
@@ -49,11 +49,11 @@ Goodbyes twin I probably would have missed something but always remember I do no
 
 You know picnic tak and jabtak metro tak I think we were so happy but uske baad I did sense something was off and then you told me your unhelpable and nothing is good, THAT SCARED THE SHIT OUTTA ME TWIN NEVER SAY THINGS LIKE THIS OKAY EVERYTHING WILL TRUST ME TURN OUT TO BE FINE IT SEEMS KIND OF FAR FETCHED TO SAY BUT IT WILL TRUST ME OKAY. Now you didn't explain what exactly happened and I am not going to ask but I am glad that you told me still.
 
-Now I'll wait for you to tell me what you have planned whatever you will have planned I know it will be the best whether its staying like this, being distant or cutting off. I'll wait okay and always always always remember no matter if we are talking or no matter whatever happens you will always always remain my twin.
+Now I'll wait for you to tell me what you have planned whatever you will have planned I know it will be the best whether its staying like this, being distant or cutting off. I'll wait for you to explain me what happened on the day of picnic after ham ghar a gaye the okay and always always always remember no matter if we are talking or no matter whatever happens you will always always remain my twin.
 
 And do not ever ever ever ever hesitate to rant or ask for help or anything okay jabtak help nahi mangonge tabtak daldal me fase rahoge I'll always remember this. And even if u message me straight after months or years I would still greet you and talk to you exactly like we are talking right now without 1 ounce of awkwardness or anything.
 
-From playing Roblox 3 bje tak to bullying kids in free huga to ragebaiting giga and dish to giving advice to daksh to doing bakchodi in school to getting om and ritu in the relationship to sending random messages to having sosososos much fun thankyou tejaswini I'll never ever forget any of this :D
+From playing Roblox 3 bje tak to bullying kids in free hugs to ragebaiting giga and dish to giving advice to daksh to doing bakchodi in school to getting om and ritu in the relationship to sending random messages to having sosososos much fun thankyou tejaswini I'll never ever forget any of this :D
 
 And yes again the same question does feelings ever dissipate? They never do :>
 

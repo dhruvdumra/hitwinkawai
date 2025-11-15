@@ -622,7 +622,7 @@ class _HomePageState extends State<HomePage>
                   context,
                   icon: '💌',
                   title: 'letter',
-                  subtitle: 'words i needed to say',
+                  subtitle: 'dil ke shabd :)',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -661,8 +661,8 @@ class _HomePageState extends State<HomePage>
                 _buildMenuCard(
                   context,
                   icon: '🔥',
-                  title: 'twin therapy',
-                  subtitle: 'whenever you need me',
+                  title: 'drug yap',
+                  subtitle: 'some words ill forever want to say',
                   onTap: () {
                     Navigator.push(
                       context,
