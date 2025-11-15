@@ -25,19 +25,37 @@ class _LetterPageState extends State<LetterPage> with TickerProviderStateMixin {
 
   final String letterText = """Dear Tejaswini,
 
-What am I writing in this letter? Is it a goodbye letter? Is it a be happy forever letter? Is it a I still like you very much letter? I don't know twin whenever I think about this I think I have a lot of final things to say but whenever I try to write this final letter I feel like jo kehna tha wo kehdiya and jo hona tha wo ho gaya. I feel like kuch bhi nahi h mere bolne ke paas ab. In the end it's me seeking closure that I cannot give to myself and it's me always trying to find peace and comfort in the closure but in the end I cannot really find my closure.
+What am I writing in this letter? Is it a goodbye letter? Is it a be happy forever letter? Is it a I still like you very much letter? I don't know twin whenever I think about about this I think I have a lot of final things to say but whenever I try to write this final letter I feel like jo kehna tha wo kehdiya and jo hona tha wo ho gaya I feel like kuch bhi nahi h mere bolne ke paas ab. In the end it's me seeking closure that I cannot give to myself and it's me always trying to find peace and comfort in the closure but in the end I cannot really find my closure.
 
-Never tbh thought ki I will have to write this letter itna jaldi ye to pata tha ki kabhi na kabhi likhna padega I was thinking around after jee or board exams but mere andar ki curiousity jaag jati h baat baat pe lmao.
-
-Ab age kya, I want you to have a very happy relationship. I want you to forget me forever so nostalgia and memories don't come haunting back :>>>. Tejaswini I still haven't decided what I want to do now and I don't think I'll ever be able too. There was a question that I asked myself a lot, "when do feelings dissipate" I realised they never do. Feelings never ever dissipate.
+Never tbh thought ki I will have to write this letter itna jaldi ye to pata tha ki kabhi na kabhi likhna padega I was thinking around after jee or board exams but mere andar ki curiousity jaag jati h baat baat pe lmao. Ab age kya, I want you to have a very happy relationship. I want you to forget me forever so nostalgia and memories don't come haunting back :>>>>. Tejaswini I still haven't decided what I want to do now and I don't think I'll ever be able too. There was a question that I asked myself a lot, "when does feelings dissipate" I realised they never do. Feelings never ever dissipate.
 
 I know you were planning to come to school on Thursdays for attendance so don't u skip school cuz of me okay it will not make anything awkward, people like me come and go. Really really sorry for causing fights between you and swastik I know I will never be able to really forgive myself for it but do I regret ever confessing to you or having these feelings ever in the first place? No I do not regret them at all and actually very proud of it and for me it was the best thing that probably happened to me.
 
 I know I have told this before but I really mean it that the last 4 months hold a really really big value for me :DD. I wanted to write this letter ill probably write this in an envelope or yk add it in the app. I tried a lot drawing ur Roblox avatar in an a4 page but it looked so goofy holy shit I never was much of a drawer. I was developing the app from the past 2 weeks and I realised that we don't have really any photos and videos that I can really put also in the memories page of the app 💔💔.
 
-Anyways thankyou twin for always being there for me and always listening to me :DDDD I have been a bitch a lot of times and I know I hurted you a lot because of it but thankyou for still not giving up on me kind of I was expecting to be blocked forever when the "hello cutie" thing happened icl. Always remember ur da goat twin ur da goat never doubt urself for any second trust me.
+Anyways thankyou twin for always being there for me and always listening to me :DDDD I have been a bitch a lot of times and I know I hurted you a lot because of it but thankyou for still not giving up on me kind of I was expecting to be blocked forever when the "hello cutie" thing happened icl. Always remember ur da goat twin ur da goat never doubt urself for any second trust me. Now that I see this the app looks so weird ass shit I should have thought it more better sorry twin. :((( 😭😭
 
-Now that I see this the app looks so weird ass shit I should have thought it more better sorry twin. :((( 😭😭
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+All the above things I wrote was written on 30th October, one day before you told me there isn't a problem and we can stay as friends. Now what I will write is written on 15th November the next day after the picnic. A lot happened in these 2 weeks A LOT AND I AM SOSOSOSOSOOSOS GLAD IT HAPPENED IT WAS SUCH A GOAT TIME OMG.
+
+Twin tbh I think if you and ritu and Ridhima would have stayed with ajinkya and tanav yall would have a LOT LOT more fun than being with us (I think I kinda stole ur day oof) but me I had sosoososososososo much fun with yall it wouldn't have been possible with anyone else kavya vibhu any group it wouldn't have been possible. THANKYOUU SOOSOSOSO MUCH FOR making this picnic sososososo special for me it was da best day of 12th da best day not even wartex was this fun. The app is almost ready oof. I took more than a month but still it turned out to be so weird oof 😭😭😭😭.
+
+I wrote jo bhi mene 30 october ko likha tha in the context of I was going to get blocked the day after (31st october) but I think I am still in the same situation. Twin I know you do not want to lose this friendship that's why you are trying so hard on managing on both the ends for this long and I am sososososo glad and sooooooo thankful for you I wouldn't have made so much memories and had so much fun and like it was so awesome omg.
+
+I know things are kind of falling apart everywhere and yes twin take ur time I know it will require being distant or cutting off now and I know you will tells me before doing anything and I am sosososos happy that u never gave up on me ur da goat twin. I still mean the above things on the 1st half of the letter.
+
+Goodbyes twin I probably would have missed something but always remember I do not overthink I think my overthinking made you not share these problems with me but that just me overthink kinda more that I am a liability for you oof. But I don't feel that way anymore okay twin u will and I am sure of it no matter what it is you will for sure pull through this. I don't know what is happening right now or what you are planning but I know whatever you would have planned now will be for the best.
+
+You know picnic tak and jabtak metro tak I think we were so happy but uske baad I did sense something was off and then you told me your unhelpable and nothing is good, THAT SCARED THE SHIT OUTTA ME TWIN NEVER SAY THINGS LIKE THIS OKAY EVERYTHING WILL TRUST ME TURN OUT TO BE FINE IT SEEMS KIND OF FAR FETCHED TO SAY BUT IT WILL TRUST ME OKAY. Now you didn't explain what exactly happened and I am not going to ask but I am glad that you told me still.
+
+Now I'll wait for you to tell me what you have planned whatever you will have planned I know it will be the best whether its staying like this, being distant or cutting off. I'll wait okay and always always always remember no matter if we are talking or no matter whatever happens you will always always remain my twin.
+
+And do not ever ever ever ever hesitate to rant or ask for help or anything okay jabtak help nahi mangonge tabtak daldal me fase rahoge I'll always remember this. And even if u message me straight after months or years I would still greet you and talk to you exactly like we are talking right now without 1 ounce of awkwardness or anything.
+
+From playing Roblox 3 bje tak to bullying kids in free huga to ragebaiting giga and dish to giving advice to daksh to doing bakchodi in school to getting om and ritu in the relationship to sending random messages to having sosososos much fun thankyou tejaswini I'll never ever forget any of this :D
+
+And yes again the same question does feelings ever dissipate? They never do :>
 
 Your twin ✨""";
 
@@ -47,17 +65,17 @@ Your twin ✨""";
 
     _rotationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1200),
+      duration: const Duration(milliseconds: 1500),
     );
 
     _openController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 1000),
     );
 
     _letterSlideController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1200),
     );
 
     _breatheController = AnimationController(
@@ -75,7 +93,7 @@ Your twin ✨""";
       end: pi,
     ).animate(CurvedAnimation(
       parent: _rotationController,
-      curve: Curves.easeInOut,
+      curve: Curves.easeInOutCubic,
     ));
 
     _openAnimation = Tween<double>(
@@ -83,7 +101,7 @@ Your twin ✨""";
       end: 1.0,
     ).animate(CurvedAnimation(
       parent: _openController,
-      curve: Curves.easeOut,
+      curve: Curves.easeInOutQuad,
     ));
 
     _letterSlideAnimation = Tween<double>(
@@ -91,18 +109,18 @@ Your twin ✨""";
       end: 1.0,
     ).animate(CurvedAnimation(
       parent: _letterSlideController,
-      curve: Curves.easeOut,
+      curve: Curves.easeOutCubic,
     ));
 
     // Start animation sequence
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(Duration(milliseconds: 600), () {
       _rotationController.forward().then((_) {
-        Future.delayed(Duration(milliseconds: 300), () {
+        Future.delayed(Duration(milliseconds: 400), () {
           _openController.forward().then((_) {
-            setState(() => _envelopeOpened = true);
-            Future.delayed(Duration(milliseconds: 200), () {
+            Future.delayed(Duration(milliseconds: 300), () {
+              setState(() => _envelopeOpened = true);
               _letterSlideController.forward().then((_) {
-                Future.delayed(Duration(milliseconds: 300), () {
+                Future.delayed(Duration(milliseconds: 500), () {
                   setState(() => _showLetter = true);
                 });
               });
@@ -420,7 +438,7 @@ Your twin ✨""";
               alignment: Alignment.topCenter,
               transform: Matrix4.identity()
                 ..setEntry(3, 2, 0.001)
-                ..rotateX(_openAnimation.value * pi * 0.7),
+                ..rotateX(_openAnimation.value * pi * 0.35),
               child: Container(
                 width: 320,
                 height: 110,
@@ -509,31 +527,24 @@ Your twin ✨""";
             );
           },
           child: Container(
-            padding: EdgeInsets.all(32),
+            padding: EdgeInsets.all(36),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFFFFFAF0),
-                  Color(0xFFFFF5E6),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(16),
+              color: Color(0xFFFFFDFA),
+              borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: Color(0xFFE8D4C0),
-                width: 2,
+                color: Color(0xFFE8DDD0).withOpacity(0.5),
+                width: 1.5,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.purpleAccent.withOpacity(0.15),
-                  blurRadius: 30,
-                  spreadRadius: 5,
+                  color: Colors.purpleAccent.withOpacity(0.1),
+                  blurRadius: 40,
+                  spreadRadius: 3,
                 ),
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  blurRadius: 20,
-                  offset: Offset(0, 10),
+                  color: Colors.black.withOpacity(0.12),
+                  blurRadius: 30,
+                  offset: Offset(0, 15),
                 ),
               ],
             ),
@@ -550,7 +561,7 @@ Your twin ✨""";
                       controller: _floatController,
                     ),
                     _AnimatedDoodle(
-                      icon: '💜',
+                      icon: '🔋',
                       delay: 0.3,
                       controller: _floatController,
                     ),
@@ -570,7 +581,7 @@ Your twin ✨""";
                       controller: _floatController,
                     ),
                     _AnimatedDoodle(
-                      icon: '✨',
+                      icon: '🔥',
                       delay: 0.9,
                       controller: _floatController,
                     ),
@@ -661,7 +672,7 @@ class _AnimatedLetterTextState extends State<_AnimatedLetterText>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: widget.text.length * 15 + 1000),
+      duration: Duration(milliseconds: widget.text.length * 10 + 800),
     );
 
     _characterCount = StepTween(
@@ -692,18 +703,12 @@ class _AnimatedLetterTextState extends State<_AnimatedLetterText>
 
         return Text(
           displayText,
-          style: GoogleFonts.caveat(
-            fontSize: 20,
-            color: Color(0xFF2D1B69),
-            fontWeight: FontWeight.w500,
-            height: 1.8,
-            letterSpacing: 0.5,
-            shadows: [
-              Shadow(
-                color: Colors.purpleAccent.withOpacity(0.1),
-                blurRadius: 4,
-              ),
-            ],
+          style: GoogleFonts.poppins(
+            fontSize: 15.5,
+            color: Color(0xFF2A2A2A),
+            fontWeight: FontWeight.w400,
+            height: 2.0,
+            letterSpacing: 0.3,
           ),
         );
       },
