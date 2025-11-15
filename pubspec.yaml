@@ -1,4 +1,4 @@
-name: hi_twin
+name: kawai_chan  
 description: A personal memories app for twin
 publish_to: 'none'
 version: 1.0.0+1
@@ -13,24 +13,26 @@ dependencies:
   cached_network_image: ^3.3.1
   video_player: ^2.8.2
   http: ^1.1.0
+  audioplayers: ^6.5.1
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
   flutter_launcher_icons: ^0.13.1
+  
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png" 
+  remove_alpha_ios: true  
 
 flutter:
   uses-material-design: true
   
-  # Add your photo assets here
   assets:
     - assets/images/
-    - assets/images/thumbnails/    
-  # If you want to add custom fonts, uncomment and configure:
-  # fonts:
-  #   - family: CustomFont
-  #     fonts:
-  #       - asset: fonts/CustomFont-Regular.ttf
-  #       - asset: fonts/CustomFont-Bold.ttf
-  #         weight: 700
+    - assets/images/thumbnails/   
+    - assets/audio/background_music.mp3
+    - assets/icon/  # ADD THIS LINE

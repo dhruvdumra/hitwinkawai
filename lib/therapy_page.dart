@@ -237,7 +237,7 @@ class _TherapyPageState extends State<TherapyPage>
               ),
               SizedBox(height: 24),
               Text(
-                'loading twin therapy...',
+                'loading drug yao...',
                 style: GoogleFonts.poppins(
                   fontSize: 16,
                   color: Colors.white70,
@@ -509,7 +509,7 @@ class _TherapyPageState extends State<TherapyPage>
                   );
                 },
                 child: Text(
-                  'twin therapy',
+                  'drug yap',
                   style: GoogleFonts.caveat(
                     fontSize: 46,
                     color: Colors.white,

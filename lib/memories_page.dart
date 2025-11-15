@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:video_player/video_player.dart';
 import 'media_manager.dart';
 import 'dart:math';
+import 'main.dart';
 
 class MemoriesPage extends StatefulWidget {
   const MemoriesPage({super.key});
@@ -889,6 +890,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   @override
   void initState() {
     super.initState();
+    // Pause background music when video page opens
+    AudioManager.pause();
     _initializeVideo();
   }
 
@@ -925,6 +928,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   @override
   void dispose() {
     _controller.dispose();
+    // Resume background music when leaving video page
+    AudioManager.resume();
     super.dispose();
   }
 
@@ -949,6 +954,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Rest of the build method stays the same...
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(

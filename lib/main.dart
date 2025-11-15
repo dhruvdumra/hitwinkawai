@@ -4,11 +4,57 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:audioplayers/audioplayers.dart';
 import 'memories_page.dart';
 import 'therapy_page.dart';
 import 'letter_page.dart';
 
 void main() => runApp(const TwinApp());
+
+// ============================================
+// GLOBAL AUDIO PLAYER
+// ============================================
+class AudioManager {
+  static final AudioPlayer _player = AudioPlayer();
+  static bool _isInitialized = false;
+
+  static Future<void> initialize() async {
+    if (_isInitialized) return;
+
+    try {
+      await _player.setReleaseMode(ReleaseMode.loop);
+      await _player.setVolume(0.4); // Set volume (0.0 to 1.0)
+      _isInitialized = true;
+    } catch (e) {
+      print('Error initializing audio: $e');
+    }
+  }
+
+  static Future<void> play() async {
+    try {
+      await _player.play(AssetSource('audio/background_music.mp3'));
+      print('🎵 Background music started');
+    } catch (e) {
+      print('Error playing audio: $e');
+    }
+  }
+
+  static Future<void> pause() async {
+    await _player.pause();
+  }
+
+  static Future<void> resume() async {
+    await _player.resume();
+  }
+
+  static Future<void> setVolume(double volume) async {
+    await _player.setVolume(volume.clamp(0.0, 1.0));
+  }
+
+  static void dispose() {
+    _player.dispose();
+  }
+}
 
 class TwinApp extends StatelessWidget {
   const TwinApp({super.key});
@@ -17,7 +63,11 @@ class TwinApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home: const SplashScreen(), // Directly shows your custom splash
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Color(0xFF0D0C1D),
+      ),
     );
   }
 }
@@ -324,6 +374,9 @@ class _SplashScreenState extends State<SplashScreen>
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
 
+    // Initialize audio and start playing after greetings
+    _initializeAudio();
+
     // PRELOAD THERAPY DATA HERE
     _preloadTherapyData();
 
@@ -351,6 +404,14 @@ class _SplashScreenState extends State<SplashScreen>
     });
   }
 
+  Future<void> _initializeAudio() async {
+    await AudioManager.initialize();
+    // Start music after the greeting animations (around 3.5 seconds)
+    Future.delayed(const Duration(milliseconds: 3500), () {
+      AudioManager.play();
+    });
+  }
+
   Future<void> _preloadTherapyData() async {
     try {
       const csvUrl =
@@ -359,7 +420,7 @@ class _SplashScreenState extends State<SplashScreen>
       final response = await http.get(Uri.parse(csvUrl));
 
       if (response.statusCode == 200) {
-        final decodedBody = utf8.decode(response.bodyBytes); // ← ADD THIS
+        final decodedBody = utf8.decode(response.bodyBytes);
         _therapyMessages = _parseCSV(decodedBody);
         print('✅ Preloaded ${_therapyMessages?.length} therapy messages');
       }
@@ -378,7 +439,6 @@ class _SplashScreenState extends State<SplashScreen>
         final line = lines[i].trim();
         if (line.isEmpty) continue;
 
-        // Better CSV parsing that handles quotes and commas
         final List<String> parts = [];
         bool inQuotes = false;
         String currentField = '';
@@ -395,13 +455,11 @@ class _SplashScreenState extends State<SplashScreen>
             currentField += char;
           }
         }
-        // Add the last field
         if (currentField.isNotEmpty) {
           parts.add(currentField.trim());
         }
 
         if (parts.length >= 5) {
-          // Clean up the text and emoji
           String text = parts[0].replaceAll('"', '').trim();
           String emoji = parts[1].replaceAll('"', '').trim();
 
@@ -617,7 +675,6 @@ class _HomePageState extends State<HomePage>
                   delay: 0,
                 ),
                 const SizedBox(height: 20),
-                // In main.dart, replace the "Letter" card's onTap:
                 _buildMenuCard(
                   context,
                   icon: '💌',
