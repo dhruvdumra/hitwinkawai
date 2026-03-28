@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1090592092100",
+    "project_id": "tinw-504d6",
+    "storage_bucket": "tinw-504d6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090592092100:android:74ad42f2cd91943b4cbe91",
+        "android_client_info": {
+          "package_name": "com.example.hi_twin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAViiAVEqHqjUDJIUlm27NgONnFjgla5R8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

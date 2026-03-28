@@ -1,15 +1,37 @@
 import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'memories_page.dart';
 import 'therapy_page.dart';
 import 'letter_page.dart';
+import 'birthday_countdown.dart';
+import 'notification_manager.dart';
+import 'notification_panel.dart';
 
-void main() => runApp(const TwinApp());
+// ============================================
+// FIREBASE SETUP
+// ============================================
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+  'twin_channel',
+  'Twin Notifications',
+  description: 'Notifications from hi twin',
+  importance: Importance.high,
+);
 
 // ============================================
 // GLOBAL AUDIO PLAYER
@@ -20,10 +42,9 @@ class AudioManager {
 
   static Future<void> initialize() async {
     if (_isInitialized) return;
-
     try {
       await _player.setReleaseMode(ReleaseMode.loop);
-      await _player.setVolume(0.4); // Set volume (0.0 to 1.0)
+      await _player.setVolume(0.4);
       _isInitialized = true;
     } catch (e) {
       print('Error initializing audio: $e');
@@ -56,6 +77,33 @@ class AudioManager {
   }
 }
 
+// ============================================
+// MAIN
+// ============================================
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  await flutterLocalNotificationsPlugin.initialize(
+    const InitializationSettings(
+      android: AndroidInitializationSettings('@drawable/ic_stat_twin'),
+    ),
+  );
+
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
+  // Load persisted notifications before app starts
+  await NotificationManager().load();
+
+  runApp(const TwinApp());
+}
+
 class TwinApp extends StatelessWidget {
   const TwinApp({super.key});
 
@@ -63,11 +111,7 @@ class TwinApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(), // Directly shows your custom splash
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Color(0xFF0D0C1D),
-      ),
+      home: const SplashScreen(),
     );
   }
 }
@@ -307,7 +351,7 @@ class _ParticleState extends State<_Particle>
 }
 
 // ============================================
-// SPLASH SCREEN - WITH PRELOADING
+// SPLASH SCREEN
 // ============================================
 
 class SplashScreen extends StatefulWidget {
@@ -333,6 +377,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+
+    _setupNotifications();
 
     final greetings = [
       'hi twin',
@@ -374,10 +420,7 @@ class _SplashScreenState extends State<SplashScreen>
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
 
-    // Initialize audio and start playing after greetings
     _initializeAudio();
-
-    // PRELOAD THERAPY DATA HERE
     _preloadTherapyData();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -404,9 +447,57 @@ class _SplashScreenState extends State<SplashScreen>
     });
   }
 
+  Future<void> _setupNotifications() async {
+    try {
+      FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+      await messaging.requestPermission(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+
+      await messaging.subscribeToTopic('twin_updates');
+
+      String? token = await messaging.getToken();
+      debugPrint('==== FCM TOKEN: $token ====');
+
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        RemoteNotification? notification = message.notification;
+        AndroidNotification? android = message.notification?.android;
+        if (notification != null && android != null) {
+          // Save notification to in-app list
+          NotificationManager().add(
+            notification.title ?? 'hi twin',
+            notification.body ?? '',
+          );
+
+          // Also show system notification bar
+          flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                channelDescription: channel.description,
+                importance: Importance.high,
+                priority: Priority.high,
+                icon: '@drawable/ic_stat_twin',
+                largeIcon: DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
+              ),
+            ),
+          );
+        }
+      });
+    } catch (e) {
+      debugPrint('Notification setup error: $e');
+    }
+  }
+
   Future<void> _initializeAudio() async {
     await AudioManager.initialize();
-    // Start music after the greeting animations (around 3.5 seconds)
     Future.delayed(const Duration(milliseconds: 3500), () {
       AudioManager.play();
     });
@@ -431,21 +522,16 @@ class _SplashScreenState extends State<SplashScreen>
 
   List<TherapyMessage> _parseCSV(String csv) {
     List<TherapyMessage> messages = [];
-
     try {
       final lines = csv.split('\n');
-
       for (int i = 1; i < lines.length; i++) {
         final line = lines[i].trim();
         if (line.isEmpty) continue;
-
         final List<String> parts = [];
         bool inQuotes = false;
         String currentField = '';
-
         for (int j = 0; j < line.length; j++) {
           final char = line[j];
-
           if (char == '"') {
             inQuotes = !inQuotes;
           } else if (char == ',' && !inQuotes) {
@@ -458,20 +544,13 @@ class _SplashScreenState extends State<SplashScreen>
         if (currentField.isNotEmpty) {
           parts.add(currentField.trim());
         }
-
         if (parts.length >= 5) {
           String text = parts[0].replaceAll('"', '').trim();
           String emoji = parts[1].replaceAll('"', '').trim();
-
-          print('Parsed: emoji="$emoji", text="${text.substring(0, 30)}..."');
-
           messages.add(TherapyMessage(
             text: text,
             emoji: emoji,
-            gradient: [
-              _parseColor(parts[2]),
-              _parseColor(parts[3]),
-            ],
+            gradient: [_parseColor(parts[2]), _parseColor(parts[3])],
             accentColor: _parseColor(parts[4]),
           ));
         }
@@ -479,7 +558,6 @@ class _SplashScreenState extends State<SplashScreen>
     } catch (e) {
       print('Error parsing CSV: $e');
     }
-
     return messages;
   }
 
@@ -488,7 +566,7 @@ class _SplashScreenState extends State<SplashScreen>
     if (hexColor.length == 6) {
       return Color(int.parse('FF$hexColor', radix: 16));
     }
-    return Color(0xFF9D50BB);
+    return const Color(0xFF9D50BB);
   }
 
   @override
@@ -599,168 +677,173 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StarryBackground(
-        starCount: 20,
-        particleCount: 8,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                const SizedBox(height: 50),
-                Text(
-                  'hi twin :D',
-                  style: GoogleFonts.caveat(
-                    fontSize: 52,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 1,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 20,
+    return Stack(
+      children: [
+        Scaffold(
+          body: StarryBackground(
+            starCount: 20,
+            particleCount: 8,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 16),
+
+                    // ── Top bar: notification bell (top-right) ──
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: const [
+                        NotificationBellButton(),
+                        SizedBox(width: 4),
+                      ],
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    Text(
+                      'hi twin :D',
+                      style: GoogleFonts.caveat(
+                        fontSize: 52,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 20,
+                            color: Colors.white.withOpacity(0.5),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      'choose what you wanna see',
+                      style: GoogleFonts.poppins(
+                        fontSize: 13,
                         color: Colors.white.withOpacity(0.5),
+                        fontWeight: FontWeight.w300,
+                        letterSpacing: 0.5,
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  'choose what you wanna see',
-                  style: GoogleFonts.poppins(
-                    fontSize: 13,
-                    color: Colors.white.withOpacity(0.5),
-                    fontWeight: FontWeight.w300,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-                const Spacer(),
-                _buildMenuCard(
-                  context,
-                  icon: '✨',
-                  title: 'memories',
-                  subtitle: 'because ill never be able to forget them',
-                  onTap: () {
-                    Navigator.push(
+                    ),
+                    const Spacer(),
+                    _buildMenuCard(
                       context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            const MemoriesPage(),
-                        transitionDuration: const Duration(milliseconds: 500),
-                        transitionsBuilder: (
+                      icon: '✨',
+                      title: 'memories',
+                      subtitle: 'because ill never be able to forget them',
+                      onTap: () {
+                        Navigator.push(
                           context,
-                          animation,
-                          secondaryAnimation,
-                          child,
-                        ) {
-                          return FadeTransition(
-                            opacity: animation,
-                            child: SlideTransition(
-                              position: Tween<Offset>(
-                                begin: const Offset(0, 0.08),
-                                end: Offset.zero,
-                              ).animate(
-                                CurvedAnimation(
-                                  parent: animation,
-                                  curve: Curves.easeOut,
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    const MemoriesPage(),
+                            transitionDuration:
+                                const Duration(milliseconds: 500),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              return FadeTransition(
+                                opacity: animation,
+                                child: SlideTransition(
+                                  position: Tween<Offset>(
+                                    begin: const Offset(0, 0.08),
+                                    end: Offset.zero,
+                                  ).animate(CurvedAnimation(
+                                    parent: animation,
+                                    curve: Curves.easeOut,
+                                  )),
+                                  child: child,
                                 ),
-                              ),
-                              child: child,
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                  delay: 0,
-                ),
-                const SizedBox(height: 20),
-                _buildMenuCard(
-                  context,
-                  icon: '💌',
-                  title: 'letter',
-                  subtitle: 'dil ke shabd :)',
-                  onTap: () {
-                    Navigator.push(
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      delay: 0,
+                    ),
+                    const SizedBox(height: 20),
+                    _buildMenuCard(
                       context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            const LetterPage(),
-                        transitionDuration: const Duration(milliseconds: 500),
-                        transitionsBuilder: (
+                      icon: '💌',
+                      title: 'letter',
+                      subtitle: 'dil ke shabd :)',
+                      onTap: () {
+                        Navigator.push(
                           context,
-                          animation,
-                          secondaryAnimation,
-                          child,
-                        ) {
-                          return FadeTransition(
-                            opacity: animation,
-                            child: SlideTransition(
-                              position: Tween<Offset>(
-                                begin: const Offset(0, 0.08),
-                                end: Offset.zero,
-                              ).animate(
-                                CurvedAnimation(
-                                  parent: animation,
-                                  curve: Curves.easeOut,
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    const LetterPage(),
+                            transitionDuration:
+                                const Duration(milliseconds: 500),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              return FadeTransition(
+                                opacity: animation,
+                                child: SlideTransition(
+                                  position: Tween<Offset>(
+                                    begin: const Offset(0, 0.08),
+                                    end: Offset.zero,
+                                  ).animate(CurvedAnimation(
+                                    parent: animation,
+                                    curve: Curves.easeOut,
+                                  )),
+                                  child: child,
                                 ),
-                              ),
-                              child: child,
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                  delay: 0.15,
-                ),
-                const SizedBox(height: 20),
-                _buildMenuCard(
-                  context,
-                  icon: '🔥',
-                  title: 'drug yap',
-                  subtitle: 'some words ill forever want to say',
-                  onTap: () {
-                    Navigator.push(
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      delay: 0.15,
+                    ),
+                    const SizedBox(height: 20),
+                    _buildMenuCard(
                       context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            TherapyPage(
-                                preloadedMessages: widget.therapyMessages),
-                        transitionDuration: const Duration(milliseconds: 500),
-                        transitionsBuilder: (
+                      icon: '🔥',
+                      title: 'drug yap',
+                      subtitle: 'some words ill forever want to say',
+                      onTap: () {
+                        Navigator.push(
                           context,
-                          animation,
-                          secondaryAnimation,
-                          child,
-                        ) {
-                          return FadeTransition(
-                            opacity: animation,
-                            child: SlideTransition(
-                              position: Tween<Offset>(
-                                begin: const Offset(0, 0.08),
-                                end: Offset.zero,
-                              ).animate(
-                                CurvedAnimation(
-                                  parent: animation,
-                                  curve: Curves.easeOut,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation,
+                                    secondaryAnimation) =>
+                                TherapyPage(
+                                    preloadedMessages: widget.therapyMessages),
+                            transitionDuration:
+                                const Duration(milliseconds: 500),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              return FadeTransition(
+                                opacity: animation,
+                                child: SlideTransition(
+                                  position: Tween<Offset>(
+                                    begin: const Offset(0, 0.08),
+                                    end: Offset.zero,
+                                  ).animate(CurvedAnimation(
+                                    parent: animation,
+                                    curve: Curves.easeOut,
+                                  )),
+                                  child: child,
                                 ),
-                              ),
-                              child: child,
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                  delay: 0.3,
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      delay: 0.3,
+                    ),
+                    const Spacer(flex: 2),
+                  ],
                 ),
-                const Spacer(flex: 2),
-              ],
+              ),
             ),
           ),
         ),
-      ),
+        const FloatingBirthdayButton(),
+      ],
     );
   }
 
